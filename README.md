@@ -38,17 +38,19 @@ Then run `make test`
 
 ## Deployment
 
-You will find an example of deployment in `deployments` folder. I use the workload identity to associate the application controller to an IAM service account.
+You will find an example of deployment in [`deployments`](./deployments) folder. I use the workload identity to associate the application controller to an IAM service account.
 
 Watch out, it has to be customized before you can use it.
 ### Application Controller sidecar
 
-The file `deployments/application-controller.yaml` contains the kustomization patch to add the sidecar to the aplpication controller.
+The file [`deployments/application-controller.yaml`](./deployments/application-controller.yaml) contains the kustomization patch to add the sidecar to the aplpication controller.
 
 ### Workload Identity
 
-The file `deployments/workload-identity.yaml` contains the configConnector to create teh IAM service account as well as configuring the workload identity for the service account running the application controller.
-The file `deployments/sa.yaml` contains the patch for the service account to terminate the workload identity binding.
+The workload identity proposed here and has to be adjusted to your infrastructure.
+
+The file [`deployments/workload-identity.yaml`](./deployments/workload-identity.yaml) contains the configConnector to create teh IAM service account as well as configuring the workload identity for the service account running the application controller.
+The file [`deployments/sa.yaml`](./deployments/sa.yaml) contains the patch for the service account to terminate the workload identity binding.
 
 In those files, we consider that argocd is deployed in a GCP project called `argocd-project` and the IAM service account asscoiated with application controller is `app-controller-gke`
 ## Configuring the target project
