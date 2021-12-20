@@ -1,0 +1,8 @@
+---
+# patches the k8s sa to bind the k8s sa to IAM sa for workload identity
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-application-controller
+  annotations:
+    iam.gke.io/gcp-service-account: app-controller-gke@argocd-project.iam.gserviceaccount.com

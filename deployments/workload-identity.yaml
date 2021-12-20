@@ -1,0 +1,26 @@
+---
+# creates the IAM sa using configConnector
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: app-controller-gke
+  # namespace running the configConnector context
+  namespace: argocd-project-configconnector
+spec:
+  displayName: SA for application controller to connect to GKE clusters
+---
+# sets the workload identoty to bind the IAM sa to k8s sa using configConnector
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: app-controller-gke-argocd-application-controller-wi
+  # namespace running the configConnector context
+  namespace: argocd-project-configconnector
+spec:
+  role: roles/iam.workloadIdentityUser
+  member: >-
+    serviceAccount:argocd-project.svc.id.goog[argocd/argocd-application-controller]
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    external: projects/argocd-project
+    kind: Project

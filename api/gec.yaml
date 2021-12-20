@@ -1,0 +1,18 @@
+openapi: "3.0.0"
+info:
+  description: "Implement a small API server to fetch the gcp creds to be used as sidecar in argocd"
+  version: "0.0.1"
+  title: "GCP Exec Creds"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "rchalumeau@magicleap.com"
+
+paths:
+  /creds:
+    get:
+      summary: "Get creds JSON"
+      description: "Returns a json response containing the GCP creds"
+      operationId: "GetCreds"
+      responses:
+        "200":
+          description: sends the JSON from GCP woth IAM token
